@@ -1,6 +1,6 @@
 # Html2Pdf - Forked
 Forked from the [original html2pdf package by spipu](https://github.com/spipu/html2pdf). 
-
+Includes performance fixes from [meritel](https://github.com/meritel/html2pdf)
 
 Html2Pdf is a HTML to PDF converter written in PHP, and compatible with PHP **7.2** to **8.4**.
 
