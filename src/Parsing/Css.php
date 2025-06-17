@@ -14,7 +14,6 @@ namespace Spipu\Html2Pdf\Parsing;
 
 use Spipu\Html2Pdf\CssConverter;
 use Spipu\Html2Pdf\MyPdf;
-use Spipu\Html2Pdf\Security\SecurityInterface;
 
 class Css
 {
@@ -27,11 +26,6 @@ class Css
      * @var CssConverter
      */
     protected $cssConverter;
-
-    /**
-     * @var SecurityInterface
-     */
-    private $security;
 
     /**
      * @var MyPdf
@@ -50,26 +44,18 @@ class Css
      * @param MyPdf $pdf
      * @param TagParser $tagParser
      * @param CssConverter $cssConverter
-     * @param SecurityInterface $security
      */
     public function __construct(
         MyPdf $pdf,
         TagParser $tagParser,
         CssConverter $cssConverter,
-        SecurityInterface $security
     ) {
-        $this->setSecurityService($security);
         $this->cssConverter = $cssConverter;
         $this->init();
         $this->setPdfParent($pdf);
         $this->tagParser = $tagParser;
     }
 
-    public function setSecurityService(SecurityInterface $security): self
-    {
-        $this->security = $security;
-        return $this;
-    }
 
     /**
      * Set the $pdf parent object
@@ -1707,7 +1693,6 @@ class Css
                 $url = (string) $tmp['href'];
 
                 // get the content of the css file
-                $this->security->checkValidPath($url);
                 $content = @file_get_contents($url);
 
                 // if "http://" in the url
